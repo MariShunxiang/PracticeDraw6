@@ -11,33 +11,46 @@ import android.widget.RelativeLayout;
 import com.hencoder.hencoderpracticedraw6.R;
 
 public class Practice04Alpha extends RelativeLayout {
-    Button animateBt;
-    ImageView imageView;
+  Button animateBt;
+  ImageView imageView;
 
-    public Practice04Alpha(Context context) {
-        super(context);
-    }
+  int state;
 
-    public Practice04Alpha(Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);
-    }
+  public Practice04Alpha(Context context) {
+    super(context);
+  }
 
-    public Practice04Alpha(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-    }
+  public Practice04Alpha(Context context, @Nullable AttributeSet attrs) {
+    super(context, attrs);
+  }
 
-    @Override
-    protected void onAttachedToWindow() {
-        super.onAttachedToWindow();
+  public Practice04Alpha(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    super(context, attrs, defStyleAttr);
+  }
 
-        animateBt = (Button) findViewById(R.id.animateBt);
-        imageView = (ImageView) findViewById(R.id.imageView);
+  @Override
+  protected void onAttachedToWindow() {
+    super.onAttachedToWindow();
 
-        animateBt.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-                // TODO 在这里处理点击事件，通过 View.animate().alpha() 来改变 View 的透明度
-            }
-        });
-    }
+    animateBt = (Button) findViewById(R.id.animateBt);
+    imageView = (ImageView) findViewById(R.id.imageView);
+
+    animateBt.setOnClickListener(new OnClickListener() {
+      @Override
+      public void onClick(final View v) {
+        switch (state) {
+          case 0:
+            imageView.animate().alpha(0);
+            break;
+          case 1:
+            imageView.animate().alpha(1);
+            break;
+        }
+        state++;
+        if (state == 2) {
+          state = 0;
+        }
+      }
+    });
+  }
 }
